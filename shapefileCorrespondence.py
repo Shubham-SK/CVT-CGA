@@ -4,7 +4,10 @@ import rasterio
 from rasterio.mask import mask
 from geopandas import *
 import geopandas as geopd
+import gdal
 import osgeo
+import glob
+import os
 
 
 def read_he5(he5_filename, dataset):
@@ -95,26 +98,55 @@ def read_shape_file(shape_filename, key_field_name, dataset, temp_tiff):
     return shp_data
 
 
-def export_to_CSV(shape_filename, he5_filename, key_field_name, dataset, temp_tiff, lat_resolution, lon_resolution, csv_dir):
+def export_to_CSV(shape_filename, he5_directory, key_field_name, dataset, temp_tiff, lat_resolution, lon_resolution, csv_dir):
     """
     Creates CSV file with requested data
     ---
     shape_filename: path to shp file
     key_field_name: column name (e.g. GID_0, NAME_0, FIPS etc.)
     dataset: Numpy Array (720, 1440) containing the grid data
-    temp_tiff: Temporary tiff dataset object for Rasterio compatibility
+    temp_tiff: Temporary tiff dataset object for Rasteio compatibility
     lat_resolution: 0.25
     lon_resolution: 0.25
     csv_dir: directory to save csv files
+    ---
+    Returns None
     """
+    files = []
+
+    # record all he5 files
+    os.chdir(he5_directory)
+    for file in glob.glob('*.he5'):
+        files.append(file)
+
+    print(files)
+
+    # main loop
+    for i in range(len(files)):
+
+        # record path essentials
+        save_dir = csv_dir
+        original_filename = files[i]
+        observation_date = original_filename.split('.he5')[0][19:28]
+
+        # extract data
+        data = read_he5(original_filename, dataset)
+        print(data)
+
+        # create temporary TIFF file
+        spei_ds = gdal.GetDriverByName('Gtiff').Create(temp_tiff, 1440, 720, 1, gdal.GDT_Float32)
+        print(spei_ds)
+
+        raster_data = rasterio.open(temp_tiff)
+        print(raster_data)
 
 
 
-
-ds = read_he5('OMI-Aura_L3-OMNO2d_2020m0518_v003-2020m0520t003149.he5', 'ColumnAmountNO2')
-print(type(ds))
+# ds = read_he5('OMI-Aura_L3-OMNO2d_2020m0518_v003-2020m0520t003149.he5', 'ColumnAmountNO2')
+# print(type(ds))
 # print(ds.shape)
 
-shp = read_shape_file('USA_admin2/USA_admin2.shp', 'NAME_1', ds)
-print(shp)
+# shp = read_shape_file('USA_admin2/USA_admin2.shp', 'NAME_1', ds)
+# print(shp)
 
+export_to_CSV('USA_admin2/USA_admin2.shp', 'he5_files/', 'FIPS', 'ColumnAmountNO2', 'temp.tif', 0, 0, 'test.csv')
