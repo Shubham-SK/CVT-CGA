@@ -13,6 +13,7 @@ def get_files(dir, ext):
     os.chdir(dir)
     for file in glob.glob(ext):
         allfiles.append(file)
+    os.chdir('/Users/shubhamkumar/Desktop/git-repos/CVT-CGA')
     return allfiles, len(allfiles)
 
 
@@ -38,6 +39,7 @@ def readShapefileFrom2DNCFile(shpdir, datas, xReSolution, yReSolution, ncData, k
         # get features of vector data
         geo = shpdata.geometry[i]
         feature = [geo.__geo_interface__]
+
         itemindex = np.argwhere(shpdata.columns == keyFieldName)[0][0]
         name = shpdata.iloc[i][itemindex]
         #        print(len(shpdata.columns),str(shpdata.columns[itemindex]),name,itemindex)
@@ -145,29 +147,27 @@ def exportStatisticToCSV(inuputShapefile, inputRasterDir, lonResolution, latReso
 
 
 if __name__ == "__main__":
-    # data path
-
-    inputPrecipRasterDir = r'F:/GMU-COVID-19/experiment/experiment/precipitation-new/'
-    inputRHRasterDir = r'F:/GMU-COVID-19/experiment/experiment/humidity/'
-    inputTempRasterDir = r'F:/GMU-COVID-19/experiment/experiment/temperature/'
+    # data paths
+    inputPrecipRasterDir = r'test_nc4s/precipitation/'
+    inputRHRasterDir = r'test_nc4s/humidity/'
+    inputTempRasterDir = r'test_nc4s/temperature/'
 
     admin2_USA = r'USA_admin2/USA_admin2.shp'
     # admin1_worldwide_top50_EU = r'F:\GMU-COVID-19\basemap_shp\basemap\admin1_worldwide(conti)\admin1_worldwide_top50_EU.shp'
     # admin0_worldwide = r'F:\GMU-COVID-19\basemap_shp\basemap\admin0_worldwide\admin0_worldwide.shp'
 
-    savedirs = r'F:/GMU-COVID-19/CSVResult/'
-
-    tempDir = r'F:/GMU-COVID-19/CSVResult/temp.tif'
+    savedirs = r'test_nc4s/'
+    tempDir = r'test_nc4s/temp.tif'
 
     # start calculation, save to CSV
-    #    dataType='Humidity'
-    #    exportStatisticToCSV(inputRHRasterDir,0.625,0.5,'daily_QV2M','nlon','nlat','GID_2',dataType,savedirs,'2D',tempDir)
-    #
-    #    dataType='Precipitation'
-    #    exportStatisticToCSV(inputPrecipRasterDir,0.1,0.1,'daily_precipitation','nlon','nlat','GID_2',dataType,savedirs,'2D',tempDir)
-    #
+    dataType='Humidity'
+    exportStatisticToCSV(admin2_USA, inputRHRasterDir, 0.625, 0.5, 'daily_QV2M', 'nlon', 'nlat', 'GID_0', dataType, savedirs, '2D', tempDir)
+
+    dataType='Precipitation'
+    exportStatisticToCSV(admin2_USA, inputPrecipRasterDir, 0.1, 0.1, 'daily_precipitation', 'nlon', 'nlat', 'GID_0', dataType, savedirs, '2D', tempDir)
+
     dataType = 'Temper_T2MMEAN'
-    exportStatisticToCSV(admin2_USA, inputTempRasterDir, 0.625, 0.5, 'daily_T2M', 'lon', 'lat', 'GID_2', dataType,
+    exportStatisticToCSV(admin2_USA, inputTempRasterDir, 0.625, 0.5, 'daily_T2M', 'lon', 'lat', 'GID_0', dataType,
                          savedirs, '2D', tempDir)
 
     print('Finish')
