@@ -148,15 +148,15 @@ def exportStatisticToCSV(inuputShapefile, inputRasterDir, lonResolution, latReso
 
 if __name__ == "__main__":
     # data paths
-    inputPrecipRasterDir = r'test_nc4s/precipitation/'
-    inputRHRasterDir = r'test_nc4s/humidity/'
-    inputTempRasterDir = r'test_nc4s/temperature/'
+    inputPrecipRasterDir = r'/home/centos/data/covid19/precipitation/daily'
+    inputRHRasterDir = r'/home/centos/data/covid19/temperature_humidity/daily/humidity'
+    inputTempRasterDir = r'/home/centos/data/covid19/temperature_humidity/daily/Temperature'
 
     admin2_USA = r'USA_admin2/USA_admin2.shp'
     # admin1_worldwide_top50_EU = r'F:\GMU-COVID-19\basemap_shp\basemap\admin1_worldwide(conti)\admin1_worldwide_top50_EU.shp'
     # admin0_worldwide = r'F:\GMU-COVID-19\basemap_shp\basemap\admin0_worldwide\admin0_worldwide.shp'
 
-    savedirs = r'test_nc4s/'
+    savedirs = r'RESULT_CSVS/'
     tempDir = r'test_nc4s/temp.tif'
 
     # start calculation, save to CSV
@@ -167,7 +167,7 @@ if __name__ == "__main__":
     exportStatisticToCSV(admin2_USA, inputPrecipRasterDir, 0.1, 0.1, 'daily_precipitation', 'nlon', 'nlat', 'GID_0', dataType, savedirs, '2D', tempDir)
 
     dataType = 'Temper_T2MMEAN'
-    exportStatisticToCSV(admin2_USA, inputTempRasterDir, 0.625, 0.5, 'daily_T2M', 'lon', 'lat', 'GID_0', dataType,
+    exportStatisticToCSV(admin2_USA, inputTempRasterDir, 0.625, 0.5, 'daily_T2M', 'nlon', 'nlat', 'GID_0', dataType,
                          savedirs, '2D', tempDir)
 
     print('Finish')
