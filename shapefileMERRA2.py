@@ -148,9 +148,9 @@ def exportStatisticToCSV(inuputShapefile, inputRasterDir, lonResolution, latReso
 
 if __name__ == "__main__":
     # data paths
-    inputPrecipRasterDir = r'/home/centos/data/covid19/precipitation/daily'
-    inputRHRasterDir = r'/home/centos/data/covid19/temperature_humidity/daily/humidity'
-    inputTempRasterDir = r'/home/centos/data/covid19/temperature_humidity/daily/Temperature'
+    inputPrecipRasterDir = r'/home/centos/data/covid19/precipitation/daily/'
+    inputRHRasterDir = r'/home/centos/data/covid19/temperature_humidity/daily/humidity/'
+    inputTempRasterDir = r'/home/centos/data/covid19/temperature_humidity/daily/Temperature/'
 
     admin2_USA = r'USA_admin2/USA_admin2.shp'
     # admin1_worldwide_top50_EU = r'F:\GMU-COVID-19\basemap_shp\basemap\admin1_worldwide(conti)\admin1_worldwide_top50_EU.shp'
