@@ -13,7 +13,7 @@ def get_files(dir, ext):
     os.chdir(dir)
     for file in glob.glob(ext):
         allfiles.append(file)
-    os.chdir('/Users/shubhamkumar/Desktop/git-repos/CVT-CGA')
+    os.chdir('/home/skumar/CVT-CGA')
     return allfiles, len(allfiles)
 
 
