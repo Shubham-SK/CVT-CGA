@@ -161,13 +161,13 @@ if __name__ == "__main__":
 
     # start calculation, save to CSV
     dataType='Humidity'
-    exportStatisticToCSV(admin2_USA, inputRHRasterDir, 0.625, 0.5, 'daily_QV2M', 'nlon', 'nlat', 'GID_0', dataType, savedirs, '2D', tempDir)
+    exportStatisticToCSV(admin2_USA, inputRHRasterDir, 0.625, 0.5, 'daily_QV2M', 'nlon', 'nlat', 'HASC_2', dataType, savedirs, '2D', tempDir)
 
     dataType='Precipitation'
-    exportStatisticToCSV(admin2_USA, inputPrecipRasterDir, 0.1, 0.1, 'daily_precipitation', 'nlon', 'nlat', 'GID_0', dataType, savedirs, '2D', tempDir)
+    exportStatisticToCSV(admin2_USA, inputPrecipRasterDir, 0.1, 0.1, 'daily_precipitation', 'nlon', 'nlat', 'HASC_2', dataType, savedirs, '2D', tempDir)
 
     dataType = 'Temper_T2MMEAN'
-    exportStatisticToCSV(admin2_USA, inputTempRasterDir, 0.625, 0.5, 'daily_T2M', 'nlon', 'nlat', 'GID_0', dataType,
+    exportStatisticToCSV(admin2_USA, inputTempRasterDir, 0.625, 0.5, 'daily_T2M', 'nlon', 'nlat', 'HASC_2', dataType,
                          savedirs, '2D', tempDir)
 
     print('Finish')
