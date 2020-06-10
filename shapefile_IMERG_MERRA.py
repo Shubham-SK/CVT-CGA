@@ -168,13 +168,13 @@ if __name__ == "__main__":
     tempDir = r'TESTS/test_nc4s/temp.tif'
 
     # start calculation, save to CSV
-#    dataType='Humidity'
-#    exportStatisticToCSV(admin1_DEU, inputRHRasterDir, 0.625, 0.5, 'daily_QV2M', 'nlon', 'nlat', 'HASC_1', dataType, r'RESULT_CSVS/', '2D', tempDir)
+    dataType='Humidity'
+    exportStatisticToCSV(admin1_DEU, inputRHRasterDir, 0.625, 0.5, 'daily_QV2M', 'nlon', 'nlat', 'HASC_1', dataType, r'RESULT_CSVS/', '2D', tempDir)
 
     dataType='Precipitation'
-    exportStatisticToCSV(admin2_USA, inputPrecipRasterDir, 0.1, 0.1, 'daily_precipitation', 'nlon', 'nlat', 'HASC_2', dataType, r'RESULT_CSVS/', '2D', tempDir)
+    exportStatisticToCSV(admin1_DEU, inputPrecipRasterDir, 0.1, 0.1, 'daily_precipitation', 'nlon', 'nlat', 'HASC_1', dataType, r'RESULT_CSVS/', '2D', tempDir)
 
-#    dataType = 'Temper_T2MMEAN'
-#    exportStatisticToCSV(admin1_DEU, inputTempRasterDir, 0.625, 0.5, 'daily_T2M', 'nlon', 'nlat', 'HASC_1', dataType, r'RESULT_CSVS/', '2D', tempDir)
+    dataType = 'Temper_T2MMEAN'
+    exportStatisticToCSV(admin1_DEU, inputTempRasterDir, 0.625, 0.5, 'daily_T2M', 'nlon', 'nlat', 'HASC_1', dataType, r'RESULT_CSVS/', '2D', tempDir)
 
     print('Finish')
