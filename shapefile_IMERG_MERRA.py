@@ -159,6 +159,7 @@ if __name__ == "__main__":
     admin1_BRA = r'shapefiles/BRA_admin1/BRA_admin1.shp'
     admin1_CAN = r'shapefiles/CAN_admin1/CAN_admin1.shp'
     admin1_HRV = r'shapefiles/HRV_admin1/HRV_admin1.shp'
+    admin1_DEU = r'shapefiles/DEU_admin1/DEU_admin1.shp'
 
     # admin1_worldwide_top50_EU = r'F:\GMU-COVID-19\basemap_shp\basemap\admin1_worldwide(conti)\admin1_worldwide_top50_EU.shp'
     # admin0_worldwide = r'F:\GMU-COVID-19\basemap_shp\basemap\admin0_worldwide\admin0_worldwide.shp'
@@ -168,12 +169,12 @@ if __name__ == "__main__":
 
     # start calculation, save to CSV
     dataType='Humidity'
-    exportStatisticToCSV(admin1_HRV, inputRHRasterDir, 0.625, 0.5, 'daily_QV2M', 'nlon', 'nlat', 'HASC_1', dataType, r'RESULT_CSVS/', '2D', tempDir)
+    exportStatisticToCSV(admin1_DEU, inputRHRasterDir, 0.625, 0.5, 'daily_QV2M', 'nlon', 'nlat', 'HASC_1', dataType, r'RESULT_CSVS/', '2D', tempDir)
 
     dataType='Precipitation'
-    exportStatisticToCSV(admin1_HRV, inputPrecipRasterDir, 0.1, 0.1, 'daily_precipitation', 'nlon', 'nlat', 'HASC_1', dataType, r'RESULT_CSVS/', '2D', tempDir)
+    exportStatisticToCSV(admin1_DEU, inputPrecipRasterDir, 0.1, 0.1, 'daily_precipitation', 'nlon', 'nlat', 'HASC_1', dataType, r'RESULT_CSVS/', '2D', tempDir)
 
     dataType = 'Temper_T2MMEAN'
-    exportStatisticToCSV(admin1_HRV, inputTempRasterDir, 0.625, 0.5, 'daily_T2M', 'nlon', 'nlat', 'HASC_1', dataType, r'RESULT_CSVS/', '2D', tempDir)
+    exportStatisticToCSV(admin1_DEU, inputTempRasterDir, 0.625, 0.5, 'daily_T2M', 'nlon', 'nlat', 'HASC_1', dataType, r'RESULT_CSVS/', '2D', tempDir)
 
     print('Finish')
