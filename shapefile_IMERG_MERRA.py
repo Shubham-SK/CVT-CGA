@@ -158,7 +158,7 @@ if __name__ == "__main__":
     admin1_AUT = r'shapefiles/AUT_admin1/AUT_admin1.shp'
     admin1_BRA = r'shapefiles/BRA_admin1/BRA_admin1.shp'
     admin1_CAN = r'shapefiles/CAN_admin1/CAN_admin1.shp'
-    admin1_HRV = r'/shapefiles/HRV_admin1/HRV_admin1.shp'
+    admin1_HRV = r'shapefiles/HRV_admin1/HRV_admin1.shp'
 
     # admin1_worldwide_top50_EU = r'F:\GMU-COVID-19\basemap_shp\basemap\admin1_worldwide(conti)\admin1_worldwide_top50_EU.shp'
     # admin0_worldwide = r'F:\GMU-COVID-19\basemap_shp\basemap\admin0_worldwide\admin0_worldwide.shp'
