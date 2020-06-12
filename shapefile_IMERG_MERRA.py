@@ -153,6 +153,7 @@ if __name__ == "__main__":
     inputTempRasterDir = r'/home/centos/data/covid19/temperature_humidity/daily/Temperature/'
 
     admin2_USA = r'shapefiles/USA_admin2/USA_admin2.shp'
+    admin1_USA = r'shapefiles/USA_admin1/USA_admin1.shp'
     global_basemap = r'shapefiles/global_basemap/global_basemap.shp'
     admin1_AUS = r'shapefiles/AUS_admin1/AUS_admin1.shp'
     admin1_AUT = r'shapefiles/AUT_admin1/AUT_admin1.shp'
