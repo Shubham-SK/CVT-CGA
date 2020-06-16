@@ -167,7 +167,7 @@ if __name__ == "__main__":
     admin1_Japan = r'shapefiles/Japan_admin1/Japan_admin1.shp'
     admin1_RUS = r'shapefiles/RUS_admin1/RUS_admin1.shp'
     admin1_SWE = r'shapefiles/SWE_admin1/SWE_admin1.shp'
-    admin1_ZFA = r'shapefiles/ZAF_admin1/ZAF_admin1.shp'
+    admin1_ZAF = r'shapefiles/ZAF_admin1/ZAF_admin1.shp'
 
     shapefile_list = [[admin1_USA, 'USA_admin1', 'HASC_1'],
                       [admin2_USA, 'USA_admin2', 'HASC_2'],
@@ -184,7 +184,7 @@ if __name__ == "__main__":
                       [admin1_Japan, 'Japan_admin1', 'HASC_1'],
                       [admin1_RUS, 'RUS_admin1', 'HASC_1'],
                       [admin1_SWE, 'SWE_admin1', 'HASC_1'],
-                      [admin1_ZFA, 'ZFA_admin1', 'HASC_1']]
+                      [admin1_ZAF, 'ZAF_admin1', 'HASC_1']]
 
     data_types = [[input_humidity, 'Humidity', 'daily_QV2M', (0.625, 0.5)],
                  [input_precipitation, 'Precipitation', 'daily_precipitation', (0.1, 0.1)],
