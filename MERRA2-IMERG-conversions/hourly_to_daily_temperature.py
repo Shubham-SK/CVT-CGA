@@ -5,11 +5,17 @@ from netCDF4 import Dataset
 import h5py
 
 
-def get_files(dir,ext):
-    allfiles=[]
-    os.chdir(dir)
-    for file in glob.glob(ext):
-        allfiles.append(file)
+# def get_files(dir,ext):
+#     allfiles=[]
+#     os.chdir(dir)
+#     for file in glob.glob(ext):
+#         allfiles.append(file)
+#     return allfiles, len(allfiles)
+
+
+def get_files(dir_list):
+    with open(dir_list, 'r') as f:
+        allfiles = [line.strip() for line in f.readlines()]
     return allfiles, len(allfiles)
 
 
@@ -35,9 +41,9 @@ def extract_h4_by_name(filename,dsname):
 
 
 if __name__ == '__main__':
-    infolder='/datavolume/covid19/temperature_humidity/hourly/'
-    output_dir='/datavolume/covid19/temperature_humidity/daily/Temperature/'
-    all_nc_files, n_all=get_files(infolder,'*.nc4')
+    intxt='/home/centos/data/covid19/temperature_humidity/hourly/new_files_MERRA.txt'
+    output_dir='/home/centos/data/covid19/temperature_humidity/daily/Temperature'
+    all_nc_files, n_all=get_files(intxt)
     all_nc_files=np.sort(all_nc_files)
 
     for i in range(n_all):
@@ -60,7 +66,7 @@ if __name__ == '__main__':
         # print allRF_mean1,allMR_mean1,allCR_mean1
         # print allRF_std1,allMR_std1,allCR_std1
 
-        outfile = output_dir+ 'daily_MEAN_T_'+idate+'.nc4'
+        outfile = output_dir+'daily_MEAN_T_'+idate+'.nc4'
         # create nc file
         fid = netcdf.netcdf_file(outfile, 'w')
         # create dimension variable, so we can use it in the netcdf
@@ -86,4 +92,3 @@ if __name__ == '__main__':
 
         fid.close()
         print(f'{outfile} successfully written.')
-
