@@ -159,8 +159,9 @@ if __name__ == "__main__":
     admin1_AUT = r'shapefiles/AUT_admin1/AUT_admin1.shp'
     admin1_BRA = r'shapefiles/BRA_admin1/BRA_admin1.shp'
     admin1_CAN = r'shapefiles/CAN_admin1/CAN_admin1.shp'
-    admin1_HRV = r'shapefiles/HRV_admin1/HRV_admin1.shp'
+    admin1_China = r'shapefiles/China_admin1/China_admin1.shp'
     admin1_DEU = r'shapefiles/DEU_admin1/DEU_admin1.shp'
+    admin1_HRV = r'shapefiles/HRV_admin1/HRV_admin1.shp'
     admin1_HUN = r'shapefiles/HUN_admin1/HUN_admin1.shp'
     admin1_India = r'shapefiles/India_admin1/India_admin1.shp'
     admin1_ITA = r'shapefiles/ITA_admin1/ITA_admin1.shp'
@@ -176,6 +177,7 @@ if __name__ == "__main__":
                       [admin1_AUT, 'AUT_admin1', 'HASC_1'],
                       [admin1_BRA, 'BRA_admin1', 'HASC_1'],
                       [admin1_CAN, 'CAN_admin1', 'HASC_1'],
+                      [admin1_China, 'China_admin1', 'HASC_1'],
                       [admin1_HRV, 'HRV_admin1', 'HASC_1'],
                       [admin1_DEU, 'DEU_admin1', 'HASC_1'],
                       [admin1_HUN, 'HUN_admin1', 'HASC_1'],
