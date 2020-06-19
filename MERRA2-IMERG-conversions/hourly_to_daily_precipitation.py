@@ -20,7 +20,7 @@ def get_files(dir_list, date=None):
             if date is None:
                 allfiles.append(line)
             else:
-                file_date = line[23:31]
+                file_date = line.split('IMERG')[1][1:9]
                 if file_date == date:
                     allfiles.append(line)
     return allfiles, len(allfiles)
@@ -74,21 +74,22 @@ if __name__ == '__main__':
     #      ]
 
     with open(intxt, 'r') as f:
-        date_range = list(set([i.strip()[23:31] for i in f.readlines()]))
+        date_range = list(set([i.strip().split('IMERG')[1][1:9] for i in f.readlines()]))
+
+    print(date_range)
 
     for idate in date_range:
         all_nc_files, n_all = get_files(intxt, date=idate)
         allday_prec = []
-        #print (all_nc_files)
         for i in range(n_all):
             the_filename = all_nc_files[i]
 
-            thePrec = np.array(extract_h4_by_name('/home/centos/data/covid19/precipitation/hourly_hdf5/'+the_filename, 'precipitationCal')).squeeze()
+            thePrec = np.array(extract_h4_by_name(the_filename, 'precipitationCal')).squeeze()
             thePrec = np.transpose(thePrec)
             #print (thePrec.shape)
             #exit()
-            lats = extract_h4_by_name('/home/centos/data/covid19/precipitation/hourly_hdf5/'+the_filename, 'lat')
-            lons = extract_h4_by_name('/home/centos/data/covid19/precipitation/hourly_hdf5/'+the_filename, 'lon')
+            lats = extract_h4_by_name(the_filename, 'lat')
+            lons = extract_h4_by_name(the_filename, 'lon')
             isif = thePrec.shape
             allday_prec.append(thePrec)
 
@@ -96,7 +97,7 @@ if __name__ == '__main__':
 
         daily_prec = np.nanmean(allday_prec, axis=0)
 
-        outfile = output_dir+ 'daily_precipitation_'+idate+'.nc4'
+        outfile = output_dir+'daily_precipitation_'+idate+'.nc4'
         # create nc file
         fid = netcdf.netcdf_file(outfile, 'w')
         # create dimension variable, so we can use it in the netcdf
