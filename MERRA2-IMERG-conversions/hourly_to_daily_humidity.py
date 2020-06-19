@@ -42,7 +42,7 @@ def extract_h4_by_name(filename,dsname):
 
 if __name__ == '__main__':
     intxt='/home/centos/data/covid19/temperature_humidity/hourly/new_files_MERRA.txt'
-    output_dir='/home/centos/data/covid19/temperature_humidity/daily/humidity'
+    output_dir='/home/centos/data/covid19/temperature_humidity/daily/humidity/'
     all_nc_files, n_all=get_files(intxt)
     all_nc_files=np.sort(all_nc_files)
 
@@ -50,9 +50,9 @@ if __name__ == '__main__':
         the_filename = all_nc_files[i]
         try:
             # print(extract_h4_by_name(the_filename, 'QV2M'))
-            theQV2M = np.array(extract_h4_by_name(the_filename, 'QV2M'))
-            lats = extract_h4_by_name(the_filename, 'lat')
-            lons = extract_h4_by_name(the_filename, 'lon')
+            theQV2M = np.array(extract_h4_by_name('/home/centos/data/covid19/temperature_humidity/hourly/'+the_filename, 'QV2M'))
+            lats = extract_h4_by_name('/home/centos/data/covid19/temperature_humidity/hourly/'+the_filename, 'lat')
+            lons = extract_h4_by_name('/home/centos/data/covid19/temperature_humidity/hourly/'+the_filename, 'lon')
         except:
             print(f'skipped {the_filename}')
             continue

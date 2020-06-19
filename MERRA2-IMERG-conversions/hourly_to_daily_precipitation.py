@@ -42,14 +42,14 @@ def extract_h5_by_name(filename,dsname):
 
 def extract_h4_by_name(filename,dsname):
     h4_data = Dataset(filename)
-    ds = np.array(h4_data[dsname][:])
+    ds = np.array(h4_data['Grid'][dsname][:])
     h4_data.close()
     return ds
 
 
 if __name__ == '__main__':
     intxt='/home/centos/data/covid19/precipitation/hourly_hdf5/new_files_HDF5.txt'
-    output_dir='/datavolume/covid19/precipitation/daily/'
+    output_dir='/home/centos/data/covid19/precipitation/daily/'
 
     #all_nc_files, n_all=get_files(infolder,'*.nc4')
     #all_nc_files=np.sort(all_nc_files)
@@ -73,22 +73,22 @@ if __name__ == '__main__':
     #               '20200406','20200407','20200408'
     #      ]
 
-    with open(intxt 'r') as f:
+    with open(intxt, 'r') as f:
         date_range = list(set([i.strip()[23:31] for i in f.readlines()]))
 
     for idate in date_range:
-        all_nc_files, n_all = get_files(date=idate, intxt)
+        all_nc_files, n_all = get_files(intxt, date=idate)
         allday_prec = []
         #print (all_nc_files)
         for i in range(n_all):
             the_filename = all_nc_files[i]
 
-            thePrec = np.array(extract_h4_by_name(the_filename, 'precipitationCal')).squeeze()
+            thePrec = np.array(extract_h4_by_name('/home/centos/data/covid19/precipitation/hourly_hdf5/'+the_filename, 'precipitationCal')).squeeze()
             thePrec = np.transpose(thePrec)
             #print (thePrec.shape)
             #exit()
-            lats = extract_h4_by_name(the_filename, 'lat')
-            lons = extract_h4_by_name(the_filename, 'lon')
+            lats = extract_h4_by_name('/home/centos/data/covid19/precipitation/hourly_hdf5/'+the_filename, 'lat')
+            lons = extract_h4_by_name('/home/centos/data/covid19/precipitation/hourly_hdf5/'+the_filename, 'lon')
             isif = thePrec.shape
             allday_prec.append(thePrec)
 
@@ -124,5 +124,5 @@ if __name__ == '__main__':
         fid.close()
 
 
-        print ('finish ...')
+        print (f'Data for {idate} succsessfully written.')
         #exit()
