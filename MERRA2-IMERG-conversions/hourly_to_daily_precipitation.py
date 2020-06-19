@@ -87,8 +87,8 @@ if __name__ == '__main__':
             thePrec = np.transpose(thePrec)
             #print (thePrec.shape)
             #exit()
-            lats = extract_h4_by_name('/home/centos/data/covid19/precipitation/hourly_hdf5/'+the_filename, 'lat')
-            lons = extract_h4_by_name('/home/centos/data/covid19/precipitation/hourly_hdf5/'+the_filename, 'lon')
+            lats = extract_h4_by_name(the_filename, 'lat')
+            lons = extract_h4_by_name(the_filename, 'lon')
             isif = thePrec.shape
             allday_prec.append(thePrec)
 
