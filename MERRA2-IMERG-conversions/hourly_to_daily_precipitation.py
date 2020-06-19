@@ -76,8 +76,6 @@ if __name__ == '__main__':
     with open(intxt, 'r') as f:
         date_range = list(set([i.strip().split('IMERG')[1][1:9] for i in f.readlines()]))
 
-    print(date_range)
-
     for idate in date_range:
         all_nc_files, n_all = get_files(intxt, date=idate)
         allday_prec = []
