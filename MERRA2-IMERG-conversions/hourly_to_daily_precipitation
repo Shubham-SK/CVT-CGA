@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import glob, os,sys
 import numpy as np
 from scipy.io import netcdf
