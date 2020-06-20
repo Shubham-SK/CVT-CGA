@@ -13,7 +13,7 @@ def get_files(dir, ext):
     os.chdir(dir)
     for file in glob.glob(ext):
         allfiles.append(file)
-    os.chdir('/home/skumar/CVT-CGA')
+    os.chdir('/home/centos/CVT-CGA')
     return allfiles, len(allfiles)
 
 
@@ -162,6 +162,7 @@ if __name__ == "__main__":
     admin1_USA = r'shapefiles/USA_admin1/USA_admin1.shp'
     admin2_USA = r'shapefiles/USA_admin2/USA_admin2.shp'
     global_basemap = r'shapefiles/global_basemap/global_basemap.shp'
+    admin1_ALB = r'/home/centos/CVT-CGA/shapefiles/Albania_basemap/ALB_admin1.shp'
     admin1_AUS = r'shapefiles/AUS_admin1/AUS_admin1.shp'
     admin1_AUT = r'shapefiles/AUT_admin1/AUT_admin1.shp'
     admin1_BRA = r'shapefiles/BRA_admin1/BRA_admin1.shp'
@@ -176,11 +177,13 @@ if __name__ == "__main__":
     admin1_Japan = r'shapefiles/Japan_admin1/Japan_admin1.shp'
     admin1_RUS = r'shapefiles/RUS_admin1/RUS_admin1.shp'
     admin1_SWE = r'shapefiles/SWE_admin1/SWE_admin1.shp'
+    admin1_UKR = r'shapefiles/UKR_admin/UKR_amin1.shp'
     admin1_ZAF = r'shapefiles/ZAF_admin1/ZAF_admin1.shp'
 
     shapefile_list = [[admin1_USA, 'USA_admin1', 'HASC_1'],
                       [admin2_USA, 'USA_admin2', 'HASC_2'],
                       [global_basemap, 'global_basemap', 'iso3'],
+                      [admin1_ALB, 'Albania_basemap', 'HASC_1'],
                       [admin1_AUS,'AUS_admin1', 'HASC_1'],
                       [admin1_AUT, 'AUT_admin1', 'HASC_1'],
                       [admin1_BRA, 'BRA_admin1', 'HASC_1'],
@@ -195,6 +198,7 @@ if __name__ == "__main__":
                       [admin1_Japan, 'Japan_admin1', 'HASC_1'],
                       [admin1_RUS, 'RUS_admin1', 'HASC_1'],
                       [admin1_SWE, 'SWE_admin1', 'HASC_1'],
+                      [admin1_UKR, 'UKR_admin1', 'HASC_1'],
                       [admin1_ZAF, 'ZAF_admin1', 'HASC_1']]
 
     data_types = [[input_humidity, 'Humidity', 'daily_QV2M', (0.625, 0.5)],
