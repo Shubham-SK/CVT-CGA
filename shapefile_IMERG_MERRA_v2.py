@@ -178,14 +178,14 @@ if __name__ == "__main__":
     admin1_SWE = r'shapefiles/SWE_admin1/SWE_admin1.shp'
     admin1_ZAF = r'shapefiles/ZAF_admin1/ZAF_admin1.shp'
 
-    shapefile_list = [#[admin1_USA, 'USA_admin1', 'HASC_1'],
-                      #[admin2_USA, 'USA_admin2', 'HASC_2'],
-                      #[global_basemap, 'global_basemap', 'iso3'],
-                      #[admin1_AUS,'AUS_admin1', 'HASC_1'],
-                      #[admin1_AUT, 'AUT_admin1', 'HASC_1'],
-                      #[admin1_BRA, 'BRA_admin1', 'HASC_1'],
-                      #[admin1_CAN, 'CAN_admin1', 'HASC_1'],
-                      #[admin1_China, 'China_admin1', 'HASC_1'],
+    shapefile_list = [[admin1_USA, 'USA_admin1', 'HASC_1'],
+                      [admin2_USA, 'USA_admin2', 'HASC_2'],
+                      [global_basemap, 'global_basemap', 'iso3'],
+                      [admin1_AUS,'AUS_admin1', 'HASC_1'],
+                      [admin1_AUT, 'AUT_admin1', 'HASC_1'],
+                      [admin1_BRA, 'BRA_admin1', 'HASC_1'],
+                      [admin1_CAN, 'CAN_admin1', 'HASC_1'],
+                      [admin1_China, 'China_admin1', 'HASC_1'],
                       [admin1_DEU, 'DEU_admin1', 'HASC_1'],
                       [admin1_DNK, 'DNK_admin1', 'HASC_1'],
                       [admin1_HRV, 'HRV_admin1', 'HASC_1'],
