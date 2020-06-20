@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/anaconda3/envs/gdal/bin/python
 
 import glob, os,sys
 import numpy as np
