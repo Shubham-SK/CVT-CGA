@@ -17,6 +17,12 @@ def get_files(dir, ext):
     return allfiles, len(allfiles)
 
 
+# def get_files(dir_list):
+#     with open(dir_list, 'r') as f:
+#         allfiles = [line.strip() for line in f.readlines()]
+#     return allfiles, len(allfiles)
+
+
 def extract_h4_by_name(filename, dsname):
     h4_data = Dataset(filename)
     #    print(h4_data)
@@ -96,6 +102,7 @@ def exportStatisticToCSV(inuputShapefile, inputRasterDir, lonResolution, latReso
                          keyField, dataTypes, saveCSVDir, Dimesion, tempTif):
     all_nc_files, n_files = get_files(inputRasterDir, '*.nc4')
     all_nc_files = np.sort(all_nc_files)
+
     for i in range(n_files):
         savedir = saveCSVDir
         the_filename = all_nc_files[i]
@@ -161,6 +168,7 @@ if __name__ == "__main__":
     admin1_CAN = r'shapefiles/CAN_admin1/CAN_admin1.shp'
     admin1_China = r'shapefiles/China_admin1/China_admin1.shp'
     admin1_DEU = r'shapefiles/DEU_admin1/DEU_admin1.shp'
+    admin1_DNK = r'shapefiles/DNK_admin1/DNK_admin1.shp'
     admin1_HRV = r'shapefiles/HRV_admin1/HRV_admin1.shp'
     admin1_HUN = r'shapefiles/HUN_admin1/HUN_admin1.shp'
     admin1_India = r'shapefiles/India_admin1/India_admin1.shp'
@@ -170,16 +178,17 @@ if __name__ == "__main__":
     admin1_SWE = r'shapefiles/SWE_admin1/SWE_admin1.shp'
     admin1_ZAF = r'shapefiles/ZAF_admin1/ZAF_admin1.shp'
 
-    shapefile_list = [[admin1_USA, 'USA_admin1', 'HASC_1'],
-                      [admin2_USA, 'USA_admin2', 'HASC_2'],
-                      [global_basemap, 'global_basemap', 'iso3'],
-                      [admin1_AUS,'AUS_admin1', 'HASC_1'],
-                      [admin1_AUT, 'AUT_admin1', 'HASC_1'],
-                      [admin1_BRA, 'BRA_admin1', 'HASC_1'],
-                      [admin1_CAN, 'CAN_admin1', 'HASC_1'],
-                      [admin1_China, 'China_admin1', 'HASC_1'],
-                      [admin1_HRV, 'HRV_admin1', 'HASC_1'],
+    shapefile_list = [#[admin1_USA, 'USA_admin1', 'HASC_1'],
+                      #[admin2_USA, 'USA_admin2', 'HASC_2'],
+                      #[global_basemap, 'global_basemap', 'iso3'],
+                      #[admin1_AUS,'AUS_admin1', 'HASC_1'],
+                      #[admin1_AUT, 'AUT_admin1', 'HASC_1'],
+                      #[admin1_BRA, 'BRA_admin1', 'HASC_1'],
+                      #[admin1_CAN, 'CAN_admin1', 'HASC_1'],
+                      #[admin1_China, 'China_admin1', 'HASC_1'],
                       [admin1_DEU, 'DEU_admin1', 'HASC_1'],
+                      [admin1_DNK, 'DNK_admin1', 'HASC_1'],
+                      [admin1_HRV, 'HRV_admin1', 'HASC_1'],
                       [admin1_HUN, 'HUN_admin1', 'HASC_1'],
                       [admin1_India, 'India_admin1', 'HASC_1'],
                       [admin1_ITA, 'ITA_admin1', 'HASC_1'],
@@ -218,4 +227,5 @@ if __name__ == "__main__":
             exportStatisticToCSV(path_shp, path_dt, resolution[0], resolution[1], ds_var_name, 'nlon', 'nlat', attribute, name_dt, save_dir, '2D', temp_dir)
             print(f'\n Finished {name_dt} for {name_shp}. \n')
         print(f'\n Finished {name_shp} \n')
+
     print('Finished')
