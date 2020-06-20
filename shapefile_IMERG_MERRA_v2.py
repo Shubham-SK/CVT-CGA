@@ -217,13 +217,13 @@ if __name__ == "__main__":
     # dataType = 'Temper_T2MMEAN'
     # exportStatisticToCSV(admin1_ZFA, inputTempRasterDir, 0.625, 0.5, 'daily_T2M', 'nlon', 'nlat', 'HASC_1', dataType, r'RESULT_CSVS/', '2D', tempDir)
 
-    temp_dir = r'/home/skumar/CVT-CGA/TESTS/test_nc4s/temp.tif'
+    temp_dir = r'/home/centos/CVT-CGA/TESTS/test_nc4s/temp.tif'
 
     for shp in shapefile_list:
         path_shp, name_shp, attribute = shp
         for dt in data_types:
             path_dt, name_dt, ds_var_name, resolution = dt
-            save_dir = f'/home/skumar/CVT-CGA/RESULT_CSVS/{name_shp}/{name_dt}/'
+            save_dir = f'/home/centos/CVT-CGA/RESULT_CSVS/{name_shp}/{name_dt}/'
             exportStatisticToCSV(path_shp, path_dt, resolution[0], resolution[1], ds_var_name, 'nlon', 'nlat', attribute, name_dt, save_dir, '2D', temp_dir)
             print(f'\n Finished {name_dt} for {name_shp}. \n')
         print(f'\n Finished {name_shp} \n')
