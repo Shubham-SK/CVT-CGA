@@ -43,7 +43,7 @@ def extract_h4_by_name(filename,dsname):
 
 
 if __name__ == '__main__':
-    intxt='/home/centos/data/covid19/temperature_humidity/hourly/new_files_MERRA.txt'
+    intxt='/home/centos/data/covid19/temperature_humidity/hourly/new_files.txt'
     output_dir='/home/centos/data/covid19/temperature_humidity/daily/Temperature/'
     all_nc_files, n_all=get_files(intxt)
     all_nc_files=np.sort(all_nc_files)

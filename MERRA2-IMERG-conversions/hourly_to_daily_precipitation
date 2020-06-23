@@ -50,7 +50,7 @@ def extract_h4_by_name(filename,dsname):
 
 
 if __name__ == '__main__':
-    intxt='/home/centos/data/covid19/precipitation/hourly_hdf5/new_files_HDF5.txt'
+    intxt='/home/centos/data/covid19/precipitation/hourly_hdf5/new_files.txt'
     output_dir='/home/centos/data/covid19/precipitation/daily/'
 
     #all_nc_files, n_all=get_files(infolder,'*.nc4')
