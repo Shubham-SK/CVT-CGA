@@ -77,7 +77,7 @@ if __name__ == '__main__':
 
     with open(intxt, 'r') as f:
         date_range = list(set([i.strip().split('IMERG')[1][1:9] for i in f.readlines()]))
-
+    all_files_txt = []
     for idate in date_range:
         all_nc_files, n_all = get_files(intxt, date=idate)
         allday_prec = []
@@ -125,5 +125,9 @@ if __name__ == '__main__':
         fid.close()
 
 
-        print (f'Data for {idate} succsessfully written.')
         #exit()
+        all_files_txt.append(outfile + '\n')
+        print (f'Data for {idate} succsessfully written.')
+    with open(f'{output_dir}new_files.txt', 'w') as f:
+        f.writelines(all_files_txt)
+       	f.close()

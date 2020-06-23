@@ -47,7 +47,7 @@ if __name__ == '__main__':
     output_dir='/home/centos/data/covid19/temperature_humidity/daily/Temperature/'
     all_nc_files, n_all=get_files(intxt)
     all_nc_files=np.sort(all_nc_files)
-
+    all_files_txt = []
     for i in range(n_all):
         the_filename = all_nc_files[i]
         try:
@@ -94,4 +94,8 @@ if __name__ == '__main__':
 
         fid.close()
         
+        all_files_txt.append(outfile + '\n')
         print(f'{outfile} successfully written.')
+    with open(f'{output_dir}new_files.txt', 'w') as f:
+        f.writelines(all_files_txt)
+        f.close()
