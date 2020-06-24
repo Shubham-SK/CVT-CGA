@@ -6,26 +6,31 @@ from datetime import datetime
 import h5py
 
 class Extract:
-    def __init__(self, data_path, name):
+    def __init__(self, data_path, name, exp):
         self.data_path = data_path
         self.name = name
         self.dir_list = os.path.join(data_path, name)
+        self.exp = exp
 
         with open(self.dir_list, 'r') as f:
             self.files = [i.strip() for i in f.readlines()]
 
-    def get_date_range(self, exp=None):
+    def get_date(self, nc4_fname):
+        date = datetime.strptime(nc4_fname[len(self.exp)+2], self.exp).strftime('%Y%m%d')
+        return date
+
+    def get_date_range(self):
         for i in self.files():
-            date_range = [datetime.strptime(i[len(exp)+2], exp).strftime('%Y%m%d') for i in self.files]
+            date_range = list(set([self.get_date(i) for i in self.files]))
         return date_range
 
-    def get_data_from_path(self, exp=None, date=None):
-        if date is None and exp is None:
+    def get_data_from_path(self, date=None):
+        if date is None and self.exp is None:
             return sorted(self.files), len(self.files)
         else:
             files = []
             for i in self.files:
-                if date == datetime.strptime(i[len(exp)+2], exp).strftime('%Y%m%d'):
+                if date == datetime.strptime(i[len(self.exp)+2], self.exp).strftime('%Y%m%d'):
                     files.append(i)
             return sorted(files), len(files)
 
