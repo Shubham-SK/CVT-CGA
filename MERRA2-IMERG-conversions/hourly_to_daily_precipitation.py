@@ -49,8 +49,8 @@ for date in date_range:
     average_prec_data_day = np.nanmean(prec_data_day, axis=0)
 
     # write out the nc4
-    out_file = writer.netcdf(date, average_prec_data_day, lats, lons, isif)
-    content_paths.append(out_file+'\n')
+    outfile = writer.netcdf(date, average_prec_data_day, lats, lons, isif)
+    content_paths.append(outfile+'\n')
 
 # write resultant files
 writer.write_file_paths(DAILY_TXT, content_paths)

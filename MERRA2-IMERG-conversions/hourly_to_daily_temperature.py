@@ -36,8 +36,8 @@ for i in tqdm(range(n_files), desc="Processing Temperature"):
     isif = average_temper_data_day.shape
 
     # write out the nc4
-    out_file = writer.netcdf(extractor.get_date(file_current), average_temper_data_day, lats, lons, isif)
-    content_paths.append(out_file+'\n')
+    outfile = writer.netcdf(extractor.get_date(file_current), average_temper_data_day, lats, lons, isif)
+    content_paths.append(outfile+'\n')
 
 # write resultant files
 writer.write_file_paths(DAILY_TXT, content_paths)

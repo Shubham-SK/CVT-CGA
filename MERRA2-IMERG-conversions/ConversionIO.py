@@ -94,7 +94,7 @@ class WriteFile:
 
         fid.close()
 
-        return out_file
+        return outfile
 
     def write_file_paths(self, name, content_paths):
         out_file_path = os.path.join(self.output_dir, name)
