@@ -1,4 +1,5 @@
 from ConversionIO import *
+import numpy as np
 
 # path variables
 DATA_DIR = '/home/centos/data/covid19/temperature_humidity/hourly'
@@ -28,7 +29,7 @@ for i in range(n_files):
         continue
 
     # find average
-    humidity_data_day = np.nanmean(humidity_data_hourly, axis=0)
+    average_humidity_data_day = np.nanmean(humidity_data_hourly, axis=0)
 
     # write out the nc4
     writer.netcdf(extractor.get_date(file_current), average_humidity_data_day, lats, lons, isif)

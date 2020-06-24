@@ -16,7 +16,7 @@ class Extract:
             self.files = [i.strip() for i in f.readlines()]
 
     def get_date(self, nc4_fname):
-        date = datetime.strptime(nc4_fname[len(self.exp)+2], self.exp).strftime('%Y%m%d')
+        date = datetime.strptime(nc4_fname[:len(self.exp)+2], self.exp).strftime('%Y%m%d')
         return date
 
     def get_date_range(self):
@@ -25,12 +25,12 @@ class Extract:
         return date_range
 
     def get_data_from_path(self, date=None):
-        if date is None and self.exp is None:
+        if date is None:
             return sorted(self.files), len(self.files)
         else:
             files = []
             for i in self.files:
-                if date == datetime.strptime(i[len(self.exp)+2], self.exp).strftime('%Y%m%d'):
+                if date == self.get_date(i):
                     files.append(i)
             return sorted(files), len(files)
 
