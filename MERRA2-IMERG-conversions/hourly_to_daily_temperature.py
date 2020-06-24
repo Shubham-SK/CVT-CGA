@@ -1,5 +1,6 @@
 from ConversionIO import *
 import numpy as np
+from tqdm import tqdm
 
 # path variables
 DATA_DIR = '/home/centos/data/covid19/temperature_humidity/hourly'
@@ -14,7 +15,7 @@ writer = WriteFile(INSTALL_DIR, 'daily_T2M', 'daily-2-meter_temperature', 'K', '
 files, n_files = extractor.get_data_from_path()
 
 # extract appropriate
-for i in range(n_files):
+for i in tqdm(range(n_files)):
     try:
         file_current = files[i]
         path = os.path.join(DATA_DIR, file_current)
@@ -23,8 +24,7 @@ for i in range(n_files):
         lats = extractor.read_nc4(['lat'], file_current)
         lons = extractor.read_nc4(['lon'], file_current)
 
-    except Exception as e:
-        print(f'Error: {e} when processing {file_current}.')
+    except OSError:
         continue
 
     # find average

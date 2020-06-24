@@ -1,5 +1,6 @@
 from ConversionIO import *
 import numpy as np
+from tqdm import tqdm
 
 # path variables
 DATA_DIR = '/home/centos/data/covid19/precipitation/hourly_hdf5'
@@ -18,22 +19,26 @@ for date in date_range:
     files, n_files = extractor.get_data_from_path(date=date)
     prec_data_day =  []
 
+    print(f'Processing Data for {date}...')
+
     # extract appropriate
-    for i in range(n_files):
+    for i in tqdm(range(n_files)):
         try:
             file_current = files[i]
             path = os.path.join(DATA_DIR, file_current)
             prec_data_sub = extractor.read_nc4(['Grid', 'precipitationCal'], file_current).squeeze()
             prec_data_sub = np.transpose(prec_data_sub)
 
-            lats = extractor.read_nc4(['lat'], file_current)
-            lons = extractor.read_nc4(['lon'], file_current)
+            lats = extractor.read_nc4(['Grid', 'lat'], file_current)
+            lons = extractor.read_nc4(['Grid', 'lon'], file_current)
             isif = prec_data_sub.shape
 
             prec_data_day.append(prec_data_sub)
-        except Exception as e:
-            print(f'Error: {e} when processing {file_current}.')
+        except OSError:
+            #print(f'Error: {e} when processing {file_current}.')
             continue
+
+    print('Saving...')
 
     # calculate average
     prec_data_day = np.array(prec_data_day)

@@ -22,7 +22,7 @@ class Extract:
 
     def get_date_range(self):
         date_range = list(set([self.get_date(i) for i in self.files]))
-        return date_range
+        return sorted(date_range)
 
     def get_data_from_path(self, date=None):
         # support date specific filter
@@ -40,14 +40,15 @@ class Extract:
 
         # open file and extract read to np array
         h4_data = Dataset(file)
-                
+        
         # support depth access
         dataset.reverse()
-        ds = np.array(h4_data[dataset.pop()])
-       	
-        while len(dataset) > 0:
-            ds = np.array(ds[dataset.pop()])
-        
+        ds = h4_data[dataset.pop()]
+
+        while len(dataset) > 0:            
+            ds = ds[dataset.pop()]
+
+        ds = np.array(ds)
         # close dataset
         h4_data.close()
 
@@ -92,5 +93,3 @@ class WriteFile:
         nc_var.units = self.units
 
         fid.close()
-
-        print(f'{outfile} successfully written.')
