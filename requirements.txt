@@ -1,0 +1,26 @@
+affine==2.3.0
+attrs==19.3.0
+certifi==2020.6.20
+cftime @ file:///home/conda/feedstock_root/build_artifacts/cftime_1589387661336/work
+click==7.1.2
+click-plugins==1.1.1
+cligj==0.5.0
+Fiona==1.8.13
+GDAL==3.0.4
+geopandas==0.7.0
+h5py==2.10.0
+munch==2.5.0
+netCDF4==1.5.3
+numpy @ file:///home/conda/feedstock_root/build_artifacts/numpy_1591485221441/work
+pandas @ file:///home/conda/feedstock_root/build_artifacts/pandas_1592421989564/work
+pyparsing==2.4.7
+pyproj @ file:///home/conda/feedstock_root/build_artifacts/pyproj_1588596072923/work
+python-dateutil==2.8.1
+pytz==2020.1
+rasterio @ file:///home/conda/feedstock_root/build_artifacts/rasterio_1591144427081/work
+Rtree==0.9.4
+scipy==1.4.1
+Shapely==1.7.0
+six @ file:///home/conda/feedstock_root/build_artifacts/six_1590081179328/work
+snuggs==1.4.7
+tqdm==4.46.1
