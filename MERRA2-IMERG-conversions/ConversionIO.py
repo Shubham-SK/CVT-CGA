@@ -40,14 +40,14 @@ class Extract:
 
         # open file and extract read to np array
         h4_data = Dataset(file)
-
+                
         # support depth access
         dataset.reverse()
         ds = np.array(h4_data[dataset.pop()])
-
-        while len(ds) > 0:
-            ds = np.array(ds[dataset])
-
+       	
+        while len(dataset) > 0:
+            ds = np.array(ds[dataset.pop()])
+        
         # close dataset
         h4_data.close()
 
