@@ -9,7 +9,7 @@ class Extract:
     def __init__(self, input_dir, in_contents_name, exp):
         self.input_dir = input_dir
         self.in_contents_name = in_contents_name
-        self.dir_list = os.path.join(data_path, in_contents_name)
+        self.dir_list = os.path.join(input_dir, in_contents_name)
         self.exp = exp
 
         # store all files in a class list attribute
@@ -43,12 +43,14 @@ class Extract:
 
         # support depth access
         dataset.reverse()
+        
         ds = h4_data[dataset.pop()]
 
         while len(dataset) > 0:
             ds = ds[dataset.pop()]
 
         ds = np.array(ds)
+        
         # close dataset
         h4_data.close()
 
