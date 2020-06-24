@@ -16,10 +16,10 @@ files, n_files = extractor.get_data_from_path()
 for i in range(n_files):
     try:
         path = os.path.join(DATA_DIR, files[i])
-        humidity_data_hourly = extractor.read_nc4(path, 'T2M')
+        humidity_data_hourly = extractor.read_nc4('QV2M', files[i])
 
-        lats = extractor.read_nc4(path, 'lat')
-        lons = extractor.read_nc4(path, 'lon')
+        lats = extractor.read_nc4('lat', files[i])
+        lons = extractor.read_nc4('lon', files[i])
         isif = humidity_data_hourly.shape
 
     except Exception as e:
