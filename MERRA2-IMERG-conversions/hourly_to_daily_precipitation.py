@@ -1,4 +1,5 @@
 from ConversionIO import *
+import numpy as np
 
 # path variables
 DATA_DIR = '/home/centos/data/covid19/precipitation/hourly_hdf5'

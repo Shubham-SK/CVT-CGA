@@ -1,4 +1,5 @@
 from ConversionIO import *
+import numpy as np
 
 # path variables
 DATA_DIR = '/home/centos/data/covid19/temperature_humidity/hourly'
@@ -21,7 +22,6 @@ for i in range(n_files):
 
         lats = extractor.read_nc4('lat', file_current)
         lons = extractor.read_nc4('lon', file_current)
-        isif = temper_data_hourly.shape
 
     except Exception as e:
         print(f'Error: {e} when processing {file_current}.')
@@ -29,6 +29,7 @@ for i in range(n_files):
 
     # find average
     temper_data_day = np.nanmean(temper_data_hourly, axis=0)
+    isif = temper_data_day.shape
 
     # write out the nc4
     writer.netcdf(extractor.get_date(file_current), average_temper_data_day, lats, lons, isif)
