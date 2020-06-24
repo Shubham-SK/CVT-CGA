@@ -26,8 +26,8 @@ class sub_file_hourly(AbstractDataFormatInit):
                 path = os.path.join(self.Extractor.input_dir, file_current)
                 data_hourly = self.Extractor.read_nc4(dataset_var, file_current)
 
-                lats = extractor.read_nc4(dataset_lat, file_current)
-                lons = extractor.read_nc4(dataset_lon file_current)
+                lats = self.Extractor.read_nc4(dataset_lat, file_current)
+                lons = self.Extractor.read_nc4(dataset_lon file_current)
 
             except OSError:
                 continue
@@ -41,7 +41,7 @@ class sub_file_hourly(AbstractDataFormatInit):
             content_paths.append(outfile+'\n')
 
         # write resultant files
-        writer.write_file_paths(content_paths)
+        self.Writer.write_file_paths(content_paths)
         print('New Files Logged.')
 
 
@@ -71,8 +71,8 @@ class ext_file_hourly(AbstractDataFormatInit):
                     data_sub = self.Extractor.read_nc4(dataset_var, file_current).squeeze()
                     data_sub = np.transpose(data_sub)
 
-                    lats = extractor.read_nc4(dataset_lat, file_current)
-                    lons = extractor.read_nc4(dataset_lon, file_current)
+                    lats = self.Extractor.read_nc4(dataset_lat, file_current)
+                    lons = self.Extractor.read_nc4(dataset_lon, file_current)
                     isif = data_sub.shape
 
                     data_day.append(data_sub)
@@ -91,5 +91,5 @@ class ext_file_hourly(AbstractDataFormatInit):
             content_paths.append(outfile+'\n')
 
         # write resultant files
-        writer.write_file_paths(content_paths)
+        self.Writer.write_file_paths(content_paths)
         print('New Files Logged.')
