@@ -21,7 +21,7 @@ class Extract:
 
     def get_data_from_path(self, exp=None, date=None):
         if date is None and exp is None:
-            return self.files
+            return sorted(self.files), len(self.files)
         else:
             files = []
             for i in self.files:
@@ -29,8 +29,8 @@ class Extract:
                     files.append(i)
             return sorted(files), len(files)
 
-    def read_nc4(self, dataset):
-        file = os.path.join(self.data_path, name)
+    def read_nc4(self, dataset, nc4_fname):
+        file = os.path.join(self.data_path, nc4_fname)
 
         # open file and extract read to np array
         h4_data = Dataset(file)
@@ -45,7 +45,7 @@ class WriteFile:
         self.var_name = var_name
         self.long_name = long_name
         self.units = units
-        self.output_dir = output
+        self.output_dir = output_dir
         self.file_prefix = file_prefix
 
     def netcdf(self, idate, extracted_data, lats, lons, isif):
