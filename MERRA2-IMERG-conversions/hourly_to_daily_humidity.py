@@ -18,7 +18,7 @@ for i in range(n_files):
     try:
         file_current = files[i]
         path = os.path.join(DATA_DIR, file_current)
-        humidity_data_hourly = extractor.read_nc4('QV2M', file_current)
+        humidity_data_hourly = extractor.read_nc4(['QV2M'], file_current)
 
         lats = extractor.read_nc4('lat', file_current)
         lons = extractor.read_nc4('lon', file_current)

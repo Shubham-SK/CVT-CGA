@@ -12,6 +12,7 @@ class Extract:
         self.dir_list = os.path.join(data_path, name)
         self.exp = exp
 
+        # store all files in a class list attribute
         with open(self.dir_list, 'r') as f:
             self.files = [i.strip() for i in f.readlines()]
 
@@ -19,11 +20,12 @@ class Extract:
         date = datetime.strptime(nc4_fname[:len(self.exp)+2], self.exp).strftime('%Y%m%d')
         return date
 
-    def get_date_range(self):        
-        date_range = list(set([self.get_date(i) for i in self.files])) 
+    def get_date_range(self):
+        date_range = list(set([self.get_date(i) for i in self.files]))
         return date_range
 
     def get_data_from_path(self, date=None):
+        # support date specific filter
         if date is None:
             return sorted(self.files), len(self.files)
         else:
@@ -33,15 +35,20 @@ class Extract:
                     files.append(i)
             return sorted(files), len(files)
 
-    def read_nc4(self, dataset, nc4_fname, subdir=None):
+    def read_nc4(self, dataset, nc4_fname):
         file = os.path.join(self.data_path, nc4_fname)
 
         # open file and extract read to np array
         h4_data = Dataset(file)
-        if subdirs is not None:
-                ds = np.array(h4_data[subdir][dataset])
-        else:
-                ds = np.array(h4_data[dataset][:])
+
+        # support depth access
+        dataset.reverse()
+        ds = np.array(h4_data[dataset.pop()])
+
+        while len(ds) > 0:
+            ds = np.array(ds[dataset])
+
+        # close dataset
         h4_data.close()
 
         return ds

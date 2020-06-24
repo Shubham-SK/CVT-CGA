@@ -23,7 +23,7 @@ for date in date_range:
         try:
             file_current = files[i]
             path = os.path.join(DATA_DIR, file_current)
-            prec_data_sub = extractor.read_nc4('precipitationCal', file_current, 'Grid').squeeze()
+            prec_data_sub = extractor.read_nc4(['Grid', 'precipitationCal'], file_current, 'Grid').squeeze()
             prec_data_sub = np.transpose(prec_data_sub)
 
             lats = extractor.read_nc4('lat', file_current)
