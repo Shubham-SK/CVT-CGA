@@ -19,9 +19,8 @@ class Extract:
         date = datetime.strptime(nc4_fname[:len(self.exp)+2], self.exp).strftime('%Y%m%d')
         return date
 
-    def get_date_range(self):
-        for i in self.files():
-            date_range = list(set([self.get_date(i) for i in self.files]))
+    def get_date_range(self):        
+        date_range = list(set([self.get_date(i) for i in self.files])) 
         return date_range
 
     def get_data_from_path(self, date=None):
@@ -34,12 +33,15 @@ class Extract:
                     files.append(i)
             return sorted(files), len(files)
 
-    def read_nc4(self, dataset, nc4_fname):
+    def read_nc4(self, dataset, nc4_fname, subdir=None):
         file = os.path.join(self.data_path, nc4_fname)
 
         # open file and extract read to np array
         h4_data = Dataset(file)
-        ds = np.array(h4_data[dataset][:])
+        if subdirs is not None:
+                ds = np.array(h4_data[subdir][dataset])
+        else:
+                ds = np.array(h4_data[dataset][:])
         h4_data.close()
 
         return ds

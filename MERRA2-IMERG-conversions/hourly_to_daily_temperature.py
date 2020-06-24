@@ -28,8 +28,8 @@ for i in range(n_files):
         continue
 
     # find average
-    temper_data_day = np.nanmean(temper_data_hourly, axis=0)
-    isif = temper_data_day.shape
+    average_temper_data_day = np.nanmean(temper_data_hourly, axis=0)
+    isif = average_temper_data_day.shape
 
     # write out the nc4
     writer.netcdf(extractor.get_date(file_current), average_temper_data_day, lats, lons, isif)

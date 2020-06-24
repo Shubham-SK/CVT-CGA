@@ -11,7 +11,7 @@ extractor = Extract(DATA_DIR, HOURLY_TXT, '3B-HHR-E.MS.MRG.3IMERG.%Y%m%d')
 writer = WriteFile(INSTALL_DIR, 'daily_precipitation', 'daily_precipitation', 'mm/hr', 'daily_precipitation_')
 
 # get date range for files, data files given for multiple parts of day
-date_range = ConversionIO.get_date_range()
+date_range = extractor.get_date_range()
 
 # iterate through date range and create list of file paths
 for date in date_range:
@@ -23,7 +23,7 @@ for date in date_range:
         try:
             file_current = files[i]
             path = os.path.join(DATA_DIR, file_current)
-            prec_data_sub = extractor.read_nc4('precipitationCal', file_current).squeeze()
+            prec_data_sub = extractor.read_nc4('precipitationCal', file_current, 'Grid').squeeze()
             prec_data_sub = np.transpose(prec_data_sub)
 
             lats = extractor.read_nc4('lat', file_current)
