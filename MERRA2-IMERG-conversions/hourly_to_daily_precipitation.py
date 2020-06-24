@@ -19,10 +19,10 @@ for date in date_range:
     files, n_files = extractor.get_data_from_path(date=date)
     prec_data_day =  []
 
-    print(f'Processing Data for {date}...')
+    # print(f'Processing Data for {date}...')
 
     # extract appropriate
-    for i in tqdm(range(n_files)):
+    for i in tqdm(range(n_files), desc=f'Processing Precipitation | {date}'):
         try:
             file_current = files[i]
             path = os.path.join(DATA_DIR, file_current)
@@ -35,10 +35,10 @@ for date in date_range:
 
             prec_data_day.append(prec_data_sub)
         except OSError:
-            #print(f'Error: {e} when processing {file_current}.')
+            # print(f'Error: {e} when processing {file_current}.')
             continue
 
-    print('Saving...')
+    # print('Saving...')
 
     # calculate average
     prec_data_day = np.array(prec_data_day)

@@ -15,7 +15,7 @@ writer = WriteFile(INSTALL_DIR, 'daily_T2M', 'daily-2-meter_temperature', 'K', '
 files, n_files = extractor.get_data_from_path()
 
 # extract appropriate
-for i in tqdm(range(n_files)):
+for i in tqdm(range(n_files), desc="Processing Temperature"):
     try:
         file_current = files[i]
         path = os.path.join(DATA_DIR, file_current)

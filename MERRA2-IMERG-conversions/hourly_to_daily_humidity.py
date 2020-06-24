@@ -15,7 +15,7 @@ writer = WriteFile(INSTALL_DIR, 'daily_QV2M', 'daily-2-meter_specific_humidity',
 files, n_files = extractor.get_data_from_path()
 
 # extract appropriate
-for i in tqdm(range(n_files)):
+for i in tqdm(range(n_files), desc='Processing Humidity'):
     try:
         file_current = files[i]
         path = os.path.join(DATA_DIR, file_current)
