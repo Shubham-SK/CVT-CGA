@@ -6,10 +6,10 @@ from datetime import datetime
 import h5py
 
 class Extract:
-    def __init__(self, data_path, name, exp):
-        self.data_path = data_path
-        self.name = name
-        self.dir_list = os.path.join(data_path, name)
+    def __init__(self, input_dir, in_contents_name, exp):
+        self.input_dir = input_dir
+        self.in_contents_name = in_contents_name
+        self.dir_list = os.path.join(data_path, in_contents_name)
         self.exp = exp
 
         # store all files in a class list attribute
@@ -36,7 +36,7 @@ class Extract:
             return sorted(files), len(files)
 
     def read_nc4(self, dataset, nc4_fname):
-        file = os.path.join(self.data_path, nc4_fname)
+        file = os.path.join(self.input_dir, nc4_fname)
 
         # open file and extract read to np array
         h4_data = Dataset(file)
@@ -56,16 +56,17 @@ class Extract:
 
 
 class WriteFile:
-    def __init__(self, output_dir, var_name, long_name, units, file_prefix):
+    def __init__(self, output_dir, out_contents_name, var_name, long_name, units, out_file_prefix):
+        self.output_dir = output_dir
+        self.out_contents_name = out_contents_name
         self.var_name = var_name
         self.long_name = long_name
         self.units = units
-        self.output_dir = output_dir
-        self.file_prefix = file_prefix
+        self.out_file_prefix = out_file_prefix
 
     def netcdf(self, idate, extracted_data, lats, lons, isif):
         # define file path and open using netcdf
-        outfile = os.path.join(self.output_dir, self.file_prefix+idate+'.nc4')
+        outfile = os.path.join(self.output_dir, self.out_file_prefix+idate+'.nc4')
         fid = netcdf.netcdf_file(outfile, 'w')
 
         # creating latitude and longitude dimensions
@@ -96,7 +97,7 @@ class WriteFile:
 
         return outfile
 
-    def write_file_paths(self, name, content_paths):
-        out_file_path = os.path.join(self.output_dir, name)
+    def write_file_paths(self, content_paths):
+        out_file_path = os.path.join(self.output_dir, self.out_contents_name)
         with open(out_file_path, 'a') as f:
             f.writelines(content_paths)
