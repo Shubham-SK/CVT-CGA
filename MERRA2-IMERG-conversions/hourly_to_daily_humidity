@@ -50,7 +50,7 @@ if __name__ == '__main__':
     all_files_txt = []
 
     for i in range(n_all):
-        the_filename = all_nc_files[i]
+        the_filename = '/home/centos/data/covid19/temperature_humidity/hourly/'+all_nc_files[i]
         try:
             # print(extract_h4_by_name(the_filename, 'QV2M'))
             theQV2M = np.array(extract_h4_by_name(the_filename, 'QV2M'))
@@ -62,9 +62,11 @@ if __name__ == '__main__':
 
         print(f'{the_filename} successfully read.')
         # print(theQV2M, type(the_filename), theQV2M.size)
+        print('jebbu:'+str(theQV2M.shape))
         dailyQV2M=np.nanmean(theQV2M,axis=0)
         idate = the_filename.split('Nx.')[1][:8]
         isif = dailyQV2M.shape
+        print(isif)
 
         # print allRF_mean1,allMR_mean1,allCR_mean1
         # print allRF_std1,allMR_std1,allCR_std1

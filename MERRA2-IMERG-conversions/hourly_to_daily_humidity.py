@@ -22,14 +22,14 @@ for i in range(n_files):
 
         lats = extractor.read_nc4('lat', file_current)
         lons = extractor.read_nc4('lon', file_current)
-        isif = humidity_data_hourly.shape
-
+        
     except Exception as e:
         print(f'Error: {e} when processing {file_current}.')
         continue
 
     # find average
     average_humidity_data_day = np.nanmean(humidity_data_hourly, axis=0)
+    isif = average_humidity_data_day.shape
 
     # write out the nc4
     writer.netcdf(extractor.get_date(file_current), average_humidity_data_day, lats, lons, isif)
