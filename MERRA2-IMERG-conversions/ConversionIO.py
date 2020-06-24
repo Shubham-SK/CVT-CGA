@@ -40,12 +40,12 @@ class Extract:
 
         # open file and extract read to np array
         h4_data = Dataset(file)
-        
+
         # support depth access
         dataset.reverse()
         ds = h4_data[dataset.pop()]
 
-        while len(dataset) > 0:            
+        while len(dataset) > 0:
             ds = ds[dataset.pop()]
 
         ds = np.array(ds)
@@ -93,3 +93,10 @@ class WriteFile:
         nc_var.units = self.units
 
         fid.close()
+
+        return out_file
+
+    def write_file_paths(self, name, content_paths):
+        out_file_path = os.path.join(self.output_dir, name)
+        with open(out_file_path, 'a') as f:
+            f.writelines(content_paths)

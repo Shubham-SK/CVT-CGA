@@ -6,6 +6,7 @@ from tqdm import tqdm
 DATA_DIR = '/home/centos/data/covid19/precipitation/hourly_hdf5'
 INSTALL_DIR = '/home/centos/data/covid19/precipitation/daily'
 HOURLY_TXT = 'new_files.txt'
+DAILY_TXT = 'new_files.txt'
 
 # setting up objects
 extractor = Extract(DATA_DIR, HOURLY_TXT, '3B-HHR-E.MS.MRG.3IMERG.%Y%m%d')
@@ -13,6 +14,9 @@ writer = WriteFile(INSTALL_DIR, 'daily_precipitation', 'daily_precipitation', 'm
 
 # get date range for files, data files given for multiple parts of day
 date_range = extractor.get_date_range()
+
+# new file paths
+content_paths = []
 
 # iterate through date range and create list of file paths
 for date in date_range:
@@ -45,4 +49,9 @@ for date in date_range:
     average_prec_data_day = np.nanmean(prec_data_day, axis=0)
 
     # write out the nc4
-    writer.netcdf(date, average_prec_data_day, lats, lons, isif)
+    out_file = writer.netcdf(date, average_prec_data_day, lats, lons, isif)
+    content_paths.append(out_file+'\n')
+
+# write resultant files
+writer.write_file_paths(DAILY_TXT, content_paths)
+print('New Files Logged.')
