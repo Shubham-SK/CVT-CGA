@@ -68,7 +68,7 @@ class ext_file_hourly(AbstractDataFormatInit):
                 try:
                     file_current = files[i]
                     path = os.path.join(self.Extractor.input_dir, file_current)
-                    data_sub = extractor.read_nc4(dataset_var, file_current).squeeze()
+                    data_sub = self.Extractor.read_nc4(dataset_var, file_current).squeeze()
                     data_sub = np.transpose(data_sub)
 
                     lats = extractor.read_nc4(dataset_lat, file_current)
