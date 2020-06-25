@@ -24,7 +24,7 @@ data_types = {'Humidity': TempHumid(
                             Extract(os.path.join(DATA_DIR, 'temperature_humidity', 'hourly', ''),
                                     HOURLY_TXT,
                                     'MERRA2_400.tavg1_2d_slv_Nx.%Y%m%d'),
-                            WriteFile(os.path.join(DATA_DIR, 'temperature_humidity', 'daily', 'humidity', ''),
+                            WriteFile(os.path.join(DATA_DIR, 'temperature_humidity', 'daily', 'Temperature', ''),
                                       DAILY_TXT,
                                       'daily_T2M',
                                       'daily-2-meter_temperature',
