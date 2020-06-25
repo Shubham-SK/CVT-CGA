@@ -1,11 +1,11 @@
-from ConversionIO import *
 import numpy as np
+import os
 from tqdm import tqdm
 
 class AbstractDataFormatInit():
-    def __init__(self, input_dir, in_contents_name, exp, output_dir, out_contents_name, var_name, long_name, units, out_file_prefix):
-        self.Extractor = Extract(input_dir, in_contents_name, exp)
-        self.Writer = WriteFile(output_dir, out_contents_name, var_name, long_name, units, out_file_prefix)
+    def __init__(self, Extractor, Writer):
+        self.Extractor = Extractor
+        self.Writer = Writer
 
 
 class TempHumid(AbstractDataFormatInit):
@@ -66,7 +66,7 @@ class Precipitation(AbstractDataFormatInit):
             for i in tqdm(range(n_files), desc=f'Processing {self.Writer.var_name} | {date}'):
                 ds_var = dataset_var.copy()
                 ds_lat = dataset_lat.copy()
-                ds_lon = dataset_lon.copy()                
+                ds_lon = dataset_lon.copy()
                 try:
                     file_current = files[i]
                     path = os.path.join(self.Extractor.input_dir, file_current)
