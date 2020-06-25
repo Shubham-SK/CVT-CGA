@@ -5,14 +5,35 @@ from types import SimpleNamespace
 from copy import deepcopy
 
 class AbstractDataFormatInit():
+    """
+    Abstract class that contains the Extractor and Writer Objects from ConversionIO.
+    ---
+    Methods:
+    None.
+    """
     def __init__(self, Extractor, Writer):
         self.Extractor = Extractor
         self.Writer = Writer
 
 
 class TempHumid(AbstractDataFormatInit):
-
+    """
+    Processor for Temperature & Humidity Data Formats.
+    ---
+    Methods:
+    process.
+    """
     def process(self, datasets):
+        """
+        Uses parent classes to create averaged daily files.
+        ---
+        datasets: <dictionary {'var':['dir', 'dir', ..], ...}>
+                  Dict containing variable names and the corresponding paths
+                  to access the *numerical array dataset.
+        ---
+        Return: None.
+        *Creates all the files in output directory with specified names.
+        """
         # new file paths
         content_paths = []
 
@@ -56,8 +77,23 @@ class TempHumid(AbstractDataFormatInit):
 
 
 class Precipitation(AbstractDataFormatInit):
-
+    """
+    Processor for Precipitation Data Formats.
+    ---
+    Methods:
+    process.
+    """
     def process(self, datasets):
+        """
+        Uses parent classes to create averaged daily files.
+        ---
+        datasets: <dictionary {'var':['dir', 'dir', ..], ...}>
+                  Dict containing variable names and the corresponding paths
+                  to access the *numerical array dataset.
+        ---
+        Return: None.
+        *Creates all the files in output directory with specified names.
+        """
         # get date range for files, data files given for multiple parts of day
         date_range = self.Extractor.get_date_range()
 
