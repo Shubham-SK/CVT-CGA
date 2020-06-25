@@ -2,6 +2,7 @@ import numpy as np
 import os
 from tqdm import tqdm
 from types import SimpleNamespace
+from copy import deepcopy
 
 class AbstractDataFormatInit():
     def __init__(self, Extractor, Writer):
@@ -24,7 +25,7 @@ class TempHumid(AbstractDataFormatInit):
             # ds_lat = dataset_lat.copy()
             # ds_lon = dataset_lon.copy()
 
-            dtemp = datasets.copy()
+            dtemp = deepcopy(datasets)
 
             try:
                 file_current = files[i]
@@ -76,7 +77,7 @@ class Precipitation(AbstractDataFormatInit):
                 # ds_lat = dataset_lat.copy()
                 # ds_lon = dataset_lon.copy()
 
-                dtemp = datasets.copy()
+                dtemp = deepcopy(datasets)
 
                 try:
                     file_current = files[i]
@@ -87,7 +88,7 @@ class Precipitation(AbstractDataFormatInit):
                     # lats = self.Extractor.read_nc4(ds_lat, file_current)
                     # lons = self.Extractor.read_nc4(ds_lon, file_current)
                     dres = SimpleNamespace(**self.Extractor.read_nc4(dtemp, file_current))
-                    data_sub = np.transpose(dres.data_sub)
+                    data_sub = np.transpose(dres.data_sub.squeeze())
                     lats = dres.lats
                     lons = dres.lons
 

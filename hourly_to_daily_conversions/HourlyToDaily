@@ -43,7 +43,7 @@ data_types = {'Humidity': TempHumid(
                             )}
 
 data_types['Humidity'].process({
-'data_horly':['QV2M'],
+'data_hourly':['QV2M'],
 'lats':['lat'],
 'lons':['lon']
 })
@@ -57,5 +57,5 @@ data_types['Temperature'].process({
 data_types['Precipitation'].process({
 'data_sub':['Grid', 'precipitationCal'],
 'lats':['Grid', 'lat'],
-'lon':['Grid', 'lon']
+'lons':['Grid', 'lon']
 })
