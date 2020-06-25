@@ -35,26 +35,28 @@ class Extract:
                     files.append(i)
             return sorted(files), len(files)
 
-    def read_nc4(self, dataset, nc4_fname):
+    def read_nc4(self, datasets, nc4_fname):
         file = os.path.join(self.input_dir, nc4_fname)
 
         # open file and extract read to np array
         h4_data = Dataset(file)
 
+        # create dictionary to store the requested data
+        res = {}
+
         # support depth access
-        dataset.reverse()
-        
-        ds = h4_data[dataset.pop()]
+        for ds_name, dataset in datasets.items():
+            dataset.reverse()
+            ds = h4_data[dataset.pop()]
+            while len(dataset) > 0:
+                ds = ds[dataset.pop()]
+            ds = np.array(ds)
+            res.update({ds_name: ds})
 
-        while len(dataset) > 0:
-            ds = ds[dataset.pop()]
-
-        ds = np.array(ds)
-        
         # close dataset
         h4_data.close()
 
-        return ds
+        return res
 
 
 class WriteFile:

@@ -1,6 +1,7 @@
 from ConversionIO import *
 import numpy as np
 from tqdm import tqdm
+from types import SimpleNamespace
 
 class AbstractDataFormatInit():
     def __init__(self, input_dir, in_contents_name, exp, output_dir, out_contents_name, var_name, long_name, units, out_file_prefix):
@@ -10,7 +11,7 @@ class AbstractDataFormatInit():
 
 class TempHumid(AbstractDataFormatInit):
 
-    def process(self, dataset_var, dataset_lat, dataset_lon):
+    def process(self, datasets):
         # new file paths
         content_paths = []
 
@@ -19,16 +20,23 @@ class TempHumid(AbstractDataFormatInit):
 
         # extract appropriate
         for i in tqdm(range(n_files), desc=f'Processing {self.Writer.var_name}'):
-            ds_var = dataset_var.copy()
-            ds_lat = dataset_lat.copy()
-            ds_lon = dataset_lon.copy()
+            # ds_var = dataset_var.copy()
+            # ds_lat = dataset_lat.copy()
+            # ds_lon = dataset_lon.copy()
+
+            dtemp = datasets.copy()
+
             try:
                 file_current = files[i]
                 path = os.path.join(self.Extractor.input_dir, file_current)
-                data_hourly = self.Extractor.read_nc4(ds_var, file_current)
-
-                lats = self.Extractor.read_nc4(ds_lat, file_current)
-                lons = self.Extractor.read_nc4(ds_lon, file_current)
+                # data_hourly = self.Extractor.read_nc4(ds_var, file_current)
+                #
+                # lats = self.Extractor.read_nc4(ds_lat, file_current)
+                # lons = self.Extractor.read_nc4(ds_lon, file_current)
+                dres = SimpleNamespace(**self.Extractor.read_nc4(dtemp, file_current))
+                data_hourly = dres.data_hourly
+                lats = dres.lats
+                lons = dres.lons
 
             except OSError:
                 continue
@@ -48,7 +56,7 @@ class TempHumid(AbstractDataFormatInit):
 
 class Precipitation(AbstractDataFormatInit):
 
-    def process(self, dataset_var, dataset_lat, dataset_lon):
+    def process(self, datasets):
         # get date range for files, data files given for multiple parts of day
         date_range = self.Extractor.get_date_range()
 
@@ -64,17 +72,25 @@ class Precipitation(AbstractDataFormatInit):
 
             # extract appropriate
             for i in tqdm(range(n_files), desc=f'Processing {self.Writer.var_name} | {date}'):
-                ds_var = dataset_var.copy()
-                ds_lat = dataset_lat.copy()
-                ds_lon = dataset_lon.copy()                
+                # ds_var = dataset_var.copy()
+                # ds_lat = dataset_lat.copy()
+                # ds_lon = dataset_lon.copy()
+
+                dtemp = datasets.copy()
+
                 try:
                     file_current = files[i]
                     path = os.path.join(self.Extractor.input_dir, file_current)
-                    data_sub = self.Extractor.read_nc4(ds_var, file_current).squeeze()
-                    data_sub = np.transpose(data_sub)
+                    # data_sub = self.Extractor.read_nc4(ds_var, file_current).squeeze()
+                    # data_sub = np.transpose(data_sub)
+                    #
+                    # lats = self.Extractor.read_nc4(ds_lat, file_current)
+                    # lons = self.Extractor.read_nc4(ds_lon, file_current)
+                    dres = SimpleNamespace(**self.Extractor.read_nc4(dtemp, file_current))
+                    data_sub = np.transpose(dres.data_sub)
+                    lats = dres.lats
+                    lons = dres.lons
 
-                    lats = self.Extractor.read_nc4(ds_lat, file_current)
-                    lons = self.Extractor.read_nc4(ds_lon, file_current)
                     isif = data_sub.shape
 
                     data_day.append(data_sub)
