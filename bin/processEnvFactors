@@ -3,21 +3,21 @@
 import sys, argparse
 from pathlib import Path
 from EnvFactors import *
+from config import *
 
-INSTALL_DIR = r'/home/centos/CVT-CGA/'
-DATA_DIR = r'/home/centos/data/covid19/'
-csvs_dir = os.path.join(INSTALL_DIR, 'RESULT_CSVS', '')
-shapefiles_dir = os.path.join(INSTALL_DIR, 'shapefiles', '')
+csvs_dir = os.path.join( DATA_DIR, 'RESULT_CSVS', '')
+shapefiles_dir = os.path.join( DATA_DIR, 'shapefiles', '')
 
 env_factors = {'NO2': EnvironmentFactor(
                     'NO2',
-                    os.path.join(DATA_DIR, 'OMNO2d.003', ''),
+                    os.path.join(DATA_DIR, 'OMNO2d_003', ''),
                     'OMI-Aura_L3-OMNO2d_%Ym%m%d_v003-',
                     [DataType('ColumnAmountNO2', name='amt'),
                       DataType('ColumnAmountNO2CloudScreened', name='screened'),
                       DataType('ColumnAmountNO2Trop', name='trop'),
                       DataType('ColumnAmountNO2TropCloudScreened', name='trop_screened'),
-                      DataType('Weight', name='weight')]),
+                      DataType('Weight', name='weight')],
+                    minVal=0),
               'Humidity': EnvironmentFactor(
                     'Humidity',
                     os.path.join(DATA_DIR, 'temperature_humidity', 'daily', 'humidity', ''),
@@ -44,6 +44,7 @@ def processFilesFrom(ef, inputFile):
     with open(inputFile, "r") as f:
         latestFiles = [file.strip() for file in f.readlines()]
         f.close()
+    print(latestFiles)
     env_factors[ef].process(latestFiles, shapefiles_dir, csvs_dir)
 
 if __name__ == "__main__":
